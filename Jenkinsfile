@@ -1,16 +1,13 @@
 pipeline {
   agent any
   stages {
-    node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
+  
+    stage('SonarQube Analysis') {
+        def scannerHome = tool 'SonarScanner';
+        withSonarQubeEnv() {
+            sh "${scannerHome}/bin/sonar-scanner"
+            }
+        }
 }
     stage('Build') {
       steps {

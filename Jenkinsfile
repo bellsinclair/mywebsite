@@ -1,14 +1,6 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Install Dependencies') {
-            steps {
-                // Install npm dependencies
-                sh 'npm install'
-            }
-        }
-
+    
         stage('SonarQube Analysis') {
             steps {
                 // Run SonarQube Scanner

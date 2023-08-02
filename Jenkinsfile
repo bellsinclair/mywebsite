@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+
+    stages {
+
         stage('SonarQube Analysis') {
             steps {
                 // Run SonarQube Scanner

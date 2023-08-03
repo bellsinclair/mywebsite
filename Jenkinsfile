@@ -4,9 +4,7 @@ pipeline {
       stage("SonarQube Analysis") {
         agent any
         steps {
-          script {
-            pwd
-            }
+          sh 'pwd'
         }
       }
     }

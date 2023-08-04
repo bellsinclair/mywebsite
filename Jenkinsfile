@@ -1,13 +1,20 @@
 pipeline {
-    agent any
-    stages {
-      stage("SonarQube Analysis") {
-        agent any
-        steps {
-          sh 'pwd'
-        }
+  agent "Static-agent"
+  stages {
+    stage('Build') {
+      steps {
+        echo 'Building...'
       }
     }
+    stage('Test') {
+      steps {
+        echo 'Testing Testing...'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        echo 'Deploying...'
+      }
+    }
+  }
 }
-
-

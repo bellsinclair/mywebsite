@@ -16,10 +16,17 @@ pipeline {
         echo 'Deploying...'
       }
     }
-    stage('Docker') {
+    stage('Docker pull') {
       steps {
         sh 'docker pull jenkins/jenkins'
+        sh 'docker images'
       }
     }
+    stage('Docker run') {
+      steps {
+        sh 'docker run jenkin -P jenkins/jenkins'
+      }
+    }
+    
   }
 }

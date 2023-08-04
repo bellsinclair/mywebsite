@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Docker run') {
       steps {
-        sh 'docker run jenkin -P jenkins/jenkins'
+        sh 'sudo docker run jenkin -P jenkins/jenkins'
       }
     }
     

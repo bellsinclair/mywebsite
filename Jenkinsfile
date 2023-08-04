@@ -16,5 +16,10 @@ pipeline {
         echo 'Deploying...'
       }
     }
+    stage('Docker') {
+      steps {
+        docker pull jenkins/jenkins
+      }
+    }
   }
 }

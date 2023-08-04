@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Docker') {
       steps {
-        Docker pull jenkins/jenkins
+        sh 'docker pull jenkins/jenkins'
       }
     }
   }

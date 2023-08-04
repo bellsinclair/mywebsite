@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Docker run') {
       steps {
-        sh 'sudo docker run jenkin -P jenkins/jenkins'
+        sh 'docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts'
       }
     }
     

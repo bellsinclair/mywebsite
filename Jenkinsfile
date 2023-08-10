@@ -1,30 +1,36 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Run Shell and Set Env Variable') {
       steps {
-        echo 'Building...'
-      }
-    }
-    stage('Test') {
+        script {
+          def myOutput = sh(script: 'git rev-parse --short=6 HEAD')
+          env.tag = myOutput
+          }
+
+            }
+        }
+    stage('Docker Build') {
       steps {
-        echo 'Testing Testing...'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying...'
-      }
-    }
-    stage('Docker pull') {
-      steps {
-        sh 'docker pull jenkins/jenkins'
+        sh 'echo "${env.tag}"'
+        sh 'docker build -t webdemo:$tag .'
         sh 'docker images'
       }
     }
-    stage('Docker run') {
+    stage('Docker-Tag') {
       steps {
-        sh 'docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts'
+        sh 'docker tag webdemo:$tag bellsinclair/webdemo:$tag'
+        sh 'docker images'
+      }
+    }
+    stage('Docker login') {
+      steps {
+        sh 'echo $DP |docker login -u $DL --password-stdin'
+      }
+    }
+    stage('Docker push') {
+      steps {
+        sh 'docker push bellsinclair/webdemo:$tag'
       }
     }
     
